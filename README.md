@@ -97,7 +97,9 @@ Run GPU-Z to verify GPU offload:
 
 ## :raised_hands: Thanks
 
-Thanks to the open source contributors of [Llama.cpp](https://github.com/ggml-org/llama.cpp).
+Thanks to [Nico Domino](https://github.com/ndom91) who shared his [GLM-4.7-Flash Strix Halo Docker setup](https://github.com/ndom91/GLM-4.7-Flash-Strix-Halo), I used this as a basis for running my own local Llama.cpp server.
+
+Thanks also to the open source contributors of [Llama.cpp](https://github.com/ggml-org/llama.cpp).
 
 ## :wave: Contributing
 
