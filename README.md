@@ -1,4 +1,4 @@
-# Llama.cpp
+# Resources for running Llama.cpp locally
 
 ## :movie_camera: Background
 
