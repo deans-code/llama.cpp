@@ -41,7 +41,7 @@ No known defects.
 ![Llama.cpp](https://img.shields.io/badge/LM_Studio-latest-blueviolet "LLama.cpp")
 ![VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-latest-blueviolet "VS Code Insiders")
 ![Windows Terminal](https://img.shields.io/badge/Windows_Terminal-latest-blueviolet "Windows Terminal")
-![GPU-Z](https://img.shields.io/badge/GPU-Z-latest-blueviolet "GPU-Z")
+![GPU-Z](https://img.shields.io/badge/GPU--Z-latest-blueviolet "GPU-Z")
 
 > [!NOTE]
 > Other operating systems and versions will work, where versions are specified treat as minimums.
