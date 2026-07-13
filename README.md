@@ -6,7 +6,7 @@ I have explored running language models locally using [LM Studio](https://lmstud
 
 Under the hood both of these tools use [Llama.cpp](https://github.com/ggml-org/llama.cpp) runtimes.
 
-I am now exploring using Llama.cpp directly to run local LLMs, primarily as a server for integration into applications and CLIs.
+I am now exploring using Llama.cpp directly to run local LLMs, primarily as a server for integration into applications and CLIs, such as using the [OpenCode](https://github.com/sst/opencode) CLI against a locally hosted model instead of a cloud provider.
 
 ## :white_check_mark: Scope
 
@@ -29,7 +29,7 @@ No known defects.
 
 ## :crystal_ball: Use of AI
 
-[GitHub Copilot](https://github.com/features/copilot) was used to assist in the development of this software.
+[GitHub Copilot](https://github.com/features/copilot) and [Claude Code](https://claude.com/product/claude-code) were used to assist in the development of this software.
 
 ## :rocket: Getting Started
 
@@ -71,29 +71,29 @@ Installation of Llama.cpp via Winget, no other configuration needed.
 
 Clone the repository.
 
-Download supported models, place models within the `models` directory.
+Run `download-models.bat` to fetch the models defined in `models.ini` from Hugging Face into the `models` directory.
 
 > [!NOTE]
-> The repository shows which models I am currently experimenting with. The script currently hardcodes their values.
+> `models.ini` shows which models I am currently experimenting with, and defines their per-model server settings (context size, sampling parameters, speculative decoding, vision support, etc.). Edit this file to add, remove, or tune models.
 
 Scripts can be executed within the VS Code terminal window, or via any other supported terminal e.g. Windows Terminal.
 
-> [!NOTE]
-> The scripts are opinionated, they are hardcoded to use Windows Terminal when launching new Llama.cpp servers.
-
 ## :zap: Features
 
-- Asks user on each execution whether they wish to update Llama.cpp.
-- Asks user which model they wish to run.
-- Runs the model in a new Windows Terminal window.
+- `download-models.bat` fetches and caches each configured model from Hugging Face.
+- `start-llama-cpp-server.bat` launches Llama.cpp's server in router mode, serving every model defined in `models.ini` simultaneously over HTTP; which model to use is chosen per-request via the API's `model` field, no restart required to switch.
+- Per-model configuration via `models.ini`, including speculative decoding (MTP draft models) and vision (multimodal projector) support where the model provides them.
 
 ## :paperclip: Usage
 
-Run `start-llama-cpp.bat` in your preferred terminal.
+Run `download-models.bat` once to fetch the models configured in `models.ini`.
 
-Run GPU-Z to verify GPU offload:
+Run `start-llama-cpp-server.bat` to start the Llama.cpp server. All configured models are served over HTTP (default `http://0.0.0.0:8080`); select which one to use via the `model` field in each API request.
 
-![GPU-Z reporting memory load](./docs/gpu-memory-load.png)
+> [!NOTE]
+> The server binds to `0.0.0.0` rather than `127.0.0.1` so that OpenCode running under WSL can reach it across the WSL/Windows network boundary.
+
+Run GPU-Z to verify GPU offload.
 
 ## :raised_hands: Thanks
 
