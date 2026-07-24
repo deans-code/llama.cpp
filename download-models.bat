@@ -1,10 +1,11 @@
 set "LLAMA_CACHE=models/"
 
-llama-cli -hf unsloth/Qwen3.6-27B-MTP-GGUF:UD-Q4_K_XL -st -p "hi" -n 1 < NUL
-llama-cli -hf unsloth/Qwen3.6-35B-A3B-MTP-GGUF:UD-Q4_K_XL -st -p "hi" -n 1 < NUL
-llama-cli -hf unsloth/gemma-4-31B-it-qat-GGUF:UD-Q4_K_XL -st -p "hi" -n 1 < NUL
-llama-cli -hf unsloth/gemma-4-26B-A4B-it-qat-GGUF:UD-Q4_K_XL -st -p "hi" -n 1 < NUL
-llama-cli -hf unsloth/North-Mini-Code-1.0-GGUF:UD-Q4_K_XL -st -p "hi" -n 1 < NUL
+@REM llama-cli -hf unsloth/Qwen3.6-27B-MTP-GGUF:UD-Q4_K_XL -st -p "hi" -n 1 < NUL
+@REM llama-cli -hf unsloth/Qwen3.6-35B-A3B-MTP-GGUF:UD-Q4_K_XL -st -p "hi" -n 1 < NUL
+@REM llama-cli -hf unsloth/gemma-4-31B-it-qat-GGUF:UD-Q4_K_XL -st -p "hi" -n 1 < NUL
+@REM llama-cli -hf unsloth/gemma-4-26B-A4B-it-qat-GGUF:UD-Q4_K_XL -st -p "hi" -n 1 < NUL
+@REM llama-cli -hf unsloth/North-Mini-Code-1.0-GGUF:UD-Q4_K_XL -st -p "hi" -n 1 < NUL
+@rem llama-cli -hf unsloth/Laguna-S-2.1-GGUF:UD-Q2_K_XL -st -p "hi" -n 1 < NUL
 
 @REM MTP draft file isn't fetched by -hf/-hfd (it doesn't match the quant-tag naming pattern), so pull it directly
 for /f "delims=" %%H in (models\models--unsloth--gemma-4-26B-A4B-it-qat-GGUF\refs\main) do set "GEMMA_MTP_HASH=%%H"
