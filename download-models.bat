@@ -7,6 +7,7 @@ set "LLAMA_CACHE=models/"
 @REM llama-cli -hf unsloth/North-Mini-Code-1.0-GGUF:UD-Q4_K_XL -st -p "hi" -n 1 < NUL
 @rem llama-cli -hf unsloth/Laguna-S-2.1-GGUF:UD-Q2_K_XL -st -p "hi" -n 1 < NUL
 @rem llama-cli -hf unsloth/Muse-Glimmer-30B-GGUF:UD-Q4_K_XL -st -p "hi" -n 1 < NUL
+@rem llama-cli -hf unsloth/Qwen3.8-27B-GGUF:UD-Q4_K_XL -st -p "hi" -n 1 < NUL
 
 @REM Muse Glimmer's -hf pull auto-selects the Q8_0 mmproj; fetch the BF16 one
 @REM directly to match the other vision models' mmproj quality here.
