@@ -54,11 +54,10 @@ if not exist "models\models--unsloth--DeepSeek-V4-Flash-0731-GGUF\snapshots\fbbb
 @REM Its root-level MTP/ folder isn't fetched -- not usable yet, --spec-type draft-mtp
 @REM support for this arch (llama.cpp PR #28243) is still unmerged (see models.ini).
 @REM Smoke test needs -fa on -c 2048 --fit on for the same reason as DeepSeek above.
-@REM NOTE: as of 2026-09-04 this fails with "unknown model architecture: 'qwen4exp'"
-@REM on a current winget install -- despite ggml-org/llama.cpp#27742 supposedly
-@REM merging 2026-08-27, that support evidently hasn't reached a released build yet.
-@REM The download itself still succeeds (that's this block's only real job); loading
-@REM will keep failing in both this smoke test and the real server until it does.
+@REM qwen4exp arch loading confirmed working as of winget build b10795-6703d7894
+@REM (2026-09-04); an earlier build on the same day still threw "unknown model
+@REM architecture: 'qwen4exp'", so re-run `winget upgrade --id ggml.llamacpp` if
+@REM this starts failing again.
 if not exist "models\models--unsloth--Qwen3.8-Flash-Next-GGUF\snapshots\38bb39ee97821de2c9009abb7e93950eec396e66\UD-Q2_K_XL\Qwen3.8-Flash-Next-UD-Q2_K_XL-00003-of-00003.gguf" (
   llama-cli -hf unsloth/Qwen3.8-Flash-Next-GGUF:UD-Q2_K_XL -fa on -c 2048 --fit on -st -p "hi" -n 1 < NUL
 )
