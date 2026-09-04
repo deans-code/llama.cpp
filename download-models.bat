@@ -40,15 +40,27 @@ if not exist "models\models--unsloth--Qwen3.8-27B-GGUF\snapshots\f1bfb127c64f707
 @REM fetches all shards automatically when given the quant tag, same as any other quant
 @REM here. Checked against the last shard so an interrupted/partial download re-runs
 @REM (llama-cli -hf resumes rather than re-fetching completed shards).
+@REM -fa on -c 2048 --fit on keeps the post-download smoke-test generation's compute
+@REM buffers small (matching models.ini's real flags) -- without them, llama-cli's
+@REM defaults (no flash-attn, context sized to this model's ~1M native window) try to
+@REM allocate >100GB of compute buffers and crash even though the download itself
+@REM already succeeded. This only affects the smoke test; models.ini already sets
+@REM flash-attn/ctx-size/fit correctly for actual serving.
 if not exist "models\models--unsloth--DeepSeek-V4-Flash-0731-GGUF\snapshots\fbbb5b93fb787c21338159b0af3318bb3f4d9768\UD-IQ2_XXS\DeepSeek-V4-Flash-0731-UD-IQ2_XXS-00003-of-00003.gguf" (
-  llama-cli -hf unsloth/DeepSeek-V4-Flash-0731-GGUF:UD-IQ2_XXS -st -p "hi" -n 1 < NUL
+  llama-cli -hf unsloth/DeepSeek-V4-Flash-0731-GGUF:UD-IQ2_XXS -fa on -c 2048 --fit on -st -p "hi" -n 1 < NUL
 )
 
 @REM Qwen3.8-Flash-Next UD-Q2_K_XL is also split into 3 shards; -hf fetches them all.
 @REM Its root-level MTP/ folder isn't fetched -- not usable yet, --spec-type draft-mtp
 @REM support for this arch (llama.cpp PR #28243) is still unmerged (see models.ini).
+@REM Smoke test needs -fa on -c 2048 --fit on for the same reason as DeepSeek above.
+@REM NOTE: as of 2026-09-04 this fails with "unknown model architecture: 'qwen4exp'"
+@REM on a current winget install -- despite ggml-org/llama.cpp#27742 supposedly
+@REM merging 2026-08-27, that support evidently hasn't reached a released build yet.
+@REM The download itself still succeeds (that's this block's only real job); loading
+@REM will keep failing in both this smoke test and the real server until it does.
 if not exist "models\models--unsloth--Qwen3.8-Flash-Next-GGUF\snapshots\38bb39ee97821de2c9009abb7e93950eec396e66\UD-Q2_K_XL\Qwen3.8-Flash-Next-UD-Q2_K_XL-00003-of-00003.gguf" (
-  llama-cli -hf unsloth/Qwen3.8-Flash-Next-GGUF:UD-Q2_K_XL -st -p "hi" -n 1 < NUL
+  llama-cli -hf unsloth/Qwen3.8-Flash-Next-GGUF:UD-Q2_K_XL -fa on -c 2048 --fit on -st -p "hi" -n 1 < NUL
 )
 
 @REM Muse Glimmer's -hf pull auto-selects the Q8_0 mmproj; fetch the BF16 one
