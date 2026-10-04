@@ -16,7 +16,7 @@ I am now exploring using Llama.cpp directly to run local LLMs, primarily as a se
 - [x] Support per-model parameters, for tweaking settings based on model performance.
 - [x] Integrate into OpenCode.
 - [x] Identify method for verifying GPU offload.
-- [x] Apply AI generated optimial llama-server parameter values.
+- [x] Apply AI generated optimal llama-server parameter values.
 
 ## :telescope: Future Gazing
 
